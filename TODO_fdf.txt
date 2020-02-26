@@ -1,0 +1,18 @@
+///Trucs a gerer a la fin
+- Verfifier que les options du makefile sont legit -Wall -Wextra -Werror
+- Virer ce fichier du projet
+- Verifier si il faut mlx dans le proj
+
+//Idees
+- Pour tracer un trait: algo de tracé de trait de Bresenham
+- Types de projection: 	1.Isometrique
+						2.Parallele
+						3.Conique
+- Pour stocker les infos nécessaires aux pointeurs sur fonctions (notemment pour les events), on va peter une structure.
+
+
+MINILIBX
+- include <mlx.h>
+- evenements: utilisation de clavier ou de souris par le user et recuperation de ces infos.
+				- man mlx_loop
+				- mlx_key_hook
