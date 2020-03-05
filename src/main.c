@@ -17,114 +17,109 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//http://www.irem.univ-mrs.fr/IMG/pdf/Algos_trace_segment_draft_2_-2.pdf
-int TraceSegmentNaif(void *mlx_ptr, void *win_ptr)
+
+
+int TraceSegmentMouseGeneral(t_param *params)
 {
-	int		px;
-	int 	x = 125;
-	int 	y = 125;
-	int 	dx = 10;
-	int 	dy = 4;
-	float 	m = ((float)dy / (float)dx);
-	int    	i = 0;
+	t_coordinates *coor = params->coordinates;
+	int dx = coor->dx;
+	int dy = coor->dy;
+	int incx = (dx > 0) ? 1 : -1;
+	int incy = (dy > 0) ? 1 : -1;
+	dx = abs(dx);
+	dy = abs(dy);
+	int cumul = 0;
+	int i = 1;
 
-	while (i++ <= dx){
-		x = x + i;
-		y = round(y + m * i);
-		px = mlx_pixel_put(mlx_ptr, win_ptr, x, y, 2392020);
-	}
-	return (0);
-}
-
-//http://www.irem.univ-mrs.fr/IMG/pdf/Algos_trace_segment_draft_2_-2.pdf
-int TraceSegmentIncremental(void *mlx_ptr, void *win_ptr)
-{
-	int 	px;
-	int 	x = 100;
-	float	y = 100;
-	int 	dx = 4;
-	int 	dy = 10;
-	float	m = ((float)dy / (float)dx);
-	int 	xx = x + dx;
-
-	while (x++ <= xx){
-		px = mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0xDB4437);
-		y = y + m;
-	}
-
-	return (0);
-}
-
-//https://repo.zenk-security.com/Cryptographie%20.%20Algorithmes%20.%20Steganographie/Les%20algorithmes%20de%20base%20du%20graphisme.pdf
-int TraceSegmentSimple(void *mlx_ptr, void *win_ptr)
-{
-	int x;
-	int x0 = 125;
-	int x1 = 150;
-	int y0 = 125;
-	int y1 = 150;
-
-	double dx = x1 - x0;
-	double dy = y1 - y0;
-	double m = dy / dx;
-	//printf("dx: %f, dy:%f, m:%f\n", dx, dy, m);
-	double y = y0;
-	for(x = x0; x <= x1 ; x++){
-		mlx_pixel_put(mlx_ptr, win_ptr, x, (int) (y + 0.5), 0xF4B400);
-		y -= m;
-	}
-	return (0);
-}
-
-int TraceSegmentBresenham(void *mlx_ptr, void *win_ptr)
-{
-	int px = 0;
-	int x0 = 125;
-	int y0 = 125;
-	int x1 = 500;
-	int y1 = 500;
-	int dx = x1 - x0;
-	int dy = y1 - y0;
-	int incre = 2 * dy;
-	int incrne = 2 * dy - dx;
-	int e = 2 * dy - dx;
-
-	while (x0++ <= x1)
+	mlx_pixel_put(params->mlx_ptr, params->win_ptr, coor->x, coor->y, 0xb5f7b4);
+	if (dx > dy)
 	{
-		px = mlx_pixel_put(mlx_ptr, win_ptr, x0, y0, 0x32a8a8);
-		if (e >= 0)
+		cumul = dx / 2;
+		while (i <= dx)
 		{
-			y0++;
-			e += incrne;
+			coor->x += incx;
+			cumul += dy;
+			if (cumul >= dx)
+			{
+				cumul -= dx;
+				coor->y += incy;
+			}
+			mlx_pixel_put(params->mlx_ptr, params->win_ptr, coor->x, coor->y, 0xb5f7b4);
+			i++;
 		}
-		else
-			e += incre;
 	}
-
+	else
+	{
+		cumul = dy /2;
+		while (i <= dy)
+		{
+			coor->y += incy;
+			cumul += dx;
+			if (cumul >= dy)
+			{
+				cumul -= dy;
+				coor->x += incx;
+			}
+			mlx_pixel_put(params->mlx_ptr, params->win_ptr, coor->x, coor->y, 0xb5f7b4);
+			i++;
+		}
+	}
 	return (0);
 }
 
-int TraceSegmentMouse(t_param *params)
+void TracerLigne(t_param *params)
 {
-	int 			px;
+  	int 			dx;
+	int				dy;
+	int				i;
+	int 			xinc;
+	int 			yinc;
+	int 			cumul;
+	int 			x;
+	int 			y;
+	t_coordinates 	*coor;
 	void			*mlx_ptr = params->mlx_ptr;
 	void			*win_ptr = params->win_ptr;
-	t_coordinates	*coor;
-
 	coor = params->coordinates;
-	while ((coor->x)++ <= coor->xx)
+  	x = coor->x;
+ 	y = coor->y ;
+  	dx = coor->xx - coor->x ;
+  	dy = coor->yy - coor->y ;
+ 	xinc = ( dx > 0 ) ? 1 : -1 ;
+  	yinc = ( dy > 0 ) ? 1 : -1 ;
+  	dx = abs(dx) ;
+  	dy = abs(dy) ;
+	mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0x32a8a8);
+  	if ( dx > dy )
 	{
-		px = mlx_pixel_put(mlx_ptr, win_ptr, coor->x, coor->y, 0x32a8a8);
-		if (coor->e >= 0)
+    	cumul = dx / 2 ;
+    	for ( i = 1 ; i <= dx ; i++ )
 		{
-			(coor->y)++;
-			(coor->e) += coor->incrne;
+      		x += xinc;
+      		cumul += dy;
+      		if ( cumul >= dx )
+			{
+        		cumul -= dx;
+        		y += yinc;
+			}
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0x32a8a8);
 		}
-		else
-			coor->e += coor->incre;
 	}
-
-	return (0);
+    else
+	{
+    	cumul = dy / 2 ;
+    	for ( i = 1 ; i <= dy ; i++ )
+		{
+     		y += yinc ;
+      		cumul += dx ;
+      		if ( cumul >= dy )
+			{
+        		cumul -= dy ;
+        		x += xinc ;
+			}
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0x32a8a8);
+		}
+	}
 }
 
 //fonction qui va tracer un trait d'un clic à l'autre
@@ -139,14 +134,14 @@ int FillMouseParams(int x, int y, t_param *params)
 	}
 	params->coordinates->xx = x;
 	params->coordinates->yy = y;
-	params->coordinates->dx = params->coordinates->xx - params->coordinates->x;
-	params->coordinates->dy = params->coordinates->yy - params->coordinates->y;
-	params->coordinates->incre = 2 * params->coordinates->dy;
-	params->coordinates->incrne = 2 * params->coordinates->dy - params->coordinates->dx;
-	params->coordinates->e = 2 * params->coordinates->dy - params->coordinates->dx;
 	printf("c->XX: %d, c->YY: %d\n", params->coordinates->xx, params->coordinates->yy);
-	TraceSegmentMouse(params);
-
+	params->coordinates->dx = (params->coordinates->xx) - (params->coordinates->x);
+	params->coordinates->dy = (params->coordinates->yy) - (params->coordinates->y);
+	params->coordinates->incre = 2 * (params->coordinates->dy);
+	params->coordinates->incree = 2 * (params->coordinates->dx - params->coordinates->dy);
+	params->coordinates->e = 2 * (params->coordinates->dx) - (params->coordinates->dy);
+	//TracerLigne(params);
+	TraceSegmentMouseGeneral(params);
 	return (0);
 }
 
@@ -158,16 +153,6 @@ int ft_mouse_hook(int button, int x,int y, t_param *params)
 	{
 		ft_bzero(params->coordinates, sizeof(t_coordinates));
 	}
-	/*mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 1, y, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x - 1, y, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y + 1, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y - 1, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 1, y + 1, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x - 1 , y - 1, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 1, y - 1, 0xe36720);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x - 1, y + 1, 0xe36720);*/
-	//printf("button: %d, x: %d, y: %d\n", button, x, y);
 	return (0);
 }
 
@@ -176,7 +161,6 @@ int	main()
 	void			*mlx_ptr;
 	void			*win_ptr;
 	int 			sx;
-	int 			ret;
 	t_param			*params;
 	t_coordinates 	*coordinates;
 
@@ -202,10 +186,6 @@ int	main()
 	params->win_ptr = win_ptr;
 	params->coordinates = coordinates;
 	sx = mlx_string_put(mlx_ptr, win_ptr, 0, 0, 2392020, "tm");
-	ret = TraceSegmentNaif(mlx_ptr, win_ptr);
-	ret = TraceSegmentIncremental(mlx_ptr, win_ptr);
-	ret = TraceSegmentSimple(mlx_ptr, win_ptr);
-	ret = TraceSegmentBresenham(mlx_ptr, win_ptr);
 	mlx_mouse_hook(win_ptr, ft_mouse_hook, params);
 	mlx_loop(mlx_ptr);
 

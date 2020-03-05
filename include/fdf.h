@@ -23,7 +23,7 @@ typedef struct 	s_coordinates
 	int			dx;
 	int			dy;
 	int			incre;
-	int			incrne;
+	int			incree;
 	int			e;
 }				t_coordinates;
 
