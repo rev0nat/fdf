@@ -71,12 +71,12 @@ void		ft_map_reader(char *filepath, t_map *map)
 {
 	get_xmax_ymax(filepath, map);
 	get_coor(filepath, map);
-	int i = 0;
+	/*int i = 0;
 	while (i < map->xmax * map->ymax)
 	{
 		printf("x = %d , y = %d, z = %d\n", map->point[i].x, map->point[i].y, map->point[i].z);
 		i++;
-	}
+	}*/
 }
 /*
 static void		ft_fill_points(t_point *points, char *line, int x, int y)

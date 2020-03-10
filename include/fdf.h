@@ -16,6 +16,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <math.h>
+# include <mlx.h>
 
 typedef struct 	s_coordinates
 {
@@ -30,12 +32,6 @@ typedef struct 	s_coordinates
 	int			e;
 }				t_coordinates;
 
-typedef struct 	s_param
-{
-	void			*mlx_ptr;
-	void			*win_ptr;
-	t_coordinates	*coordinates;
-}				t_param;
 
 typedef struct	s_point
 {
@@ -51,9 +47,17 @@ typedef struct	s_map
 	int			ymax;
 }				t_map;
 
+typedef struct 	s_param
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_map			*map;
+}				t_param;
+
 void		ft_map_reader(char *filepath, t_map *map);
 void		ft_fdf(char *filepath);
 void		ft_fatal_exit(void);
 void		ft_fatal_exit_putendl(char *str);
+void		ft_draw(t_param *params);
 
 #endif

@@ -16,6 +16,7 @@ SRC_NAME = main.c \
 		   ft_fdf.c \
 		   ft_map_reader.c \
 		   ft_fatal_exit.c \
+		   ft_draw.c \
 
 
 INC = include/
