@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:46:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/22 14:54:01 by aguillot         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:41:13 by schakor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,5 @@ int		ft_strlenuntilc(const char *str, char c);
 char	*ft_strndup(const char *src, int n);
 char	*ft_strjoinfree(char *s1, char const *s2);
 int		get_next_line(const int fd, char **line);
+size_t	ft_arrlen(char **array);
 #endif

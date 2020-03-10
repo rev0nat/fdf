@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_fatal_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schakor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/10 14:47:49 by schakor           #+#    #+#             */
-/*   Updated: 2020/03/10 14:57:53 by schakor          ###   ########.fr       */
+/*   Created: 2020/03/10 16:30:25 by schakor           #+#    #+#             */
+/*   Updated: 2020/03/10 16:31:35 by schakor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int			main(int ac, char **av)
+void		ft_fatal_exit(void)
 {
-	char	*filepath;
+	perror("");
+	exit(127);
+}
 
-	filepath = av[1];
-	if (ac != 2)
-		ft_fatal_exit_putendl("usage: ./fdf filename");
-	ft_fdf(filepath);
-	return (0);
+void		ft_fatal_exit_putendl(char *str)
+{
+	ft_putendl_fd(str, STDERR_FILENO);
+	exit(127);
 }

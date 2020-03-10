@@ -6,7 +6,7 @@
 #    By: aguillot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/15 18:57:13 by aguillot          #+#    #+#              #
-#    Updated: 2018/10/22 14:51:51 by aguillot         ###   ########.fr        #
+#    Updated: 2020/03/10 16:41:29 by schakor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC  = ./ft_isalpha.c ft_memccpy.c ft_memmove.c ft_putendl_fd.c ft_strcat.c \
 	   ft_strflen.c ft_nblen.c ft_putoff_t.c ft_strlink.c ft_off_t_len.c \
 	   ft_count_char.c ft_splitwhitespaces.c ft_tabdup.c ft_strlinktochar.c\
 	   ft_strichr.c ft_strndup.c ft_strjoinfree.c ft_strlenuntilc.c\
-	   get_next_line.c
+	   get_next_line.c ft_arrlen.c
 
 OBJ = ./ft_isalpha.o ft_memccpy.o ft_memmove.o ft_putendl_fd.o ft_strcat.o \
 	   ft_strdel.o ft_strjoin.o ft_strncat.o ft_strnstr.o ft_tolower.o \
@@ -44,7 +44,7 @@ OBJ = ./ft_isalpha.o ft_memccpy.o ft_memmove.o ft_putendl_fd.o ft_strcat.o \
 	   ft_strflen.o ft_nblen.o ft_putoff_t.o ft_strlink.o ft_off_t_len.o \
 	   ft_count_char.o ft_splitwhitespaces.o ft_tabdup.o ft_strlinktochar.o\
 	   ft_strichr.o ft_strndup.o ft_strjoinfree.o ft_strlenuntilc.o\
-	   get_next_line.o
+	   get_next_line.o ft_arrlen.o
 
 all: $(NAME)
 

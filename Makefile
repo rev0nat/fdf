@@ -6,13 +6,17 @@
 #    By: aguillot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/23 17:11:35 by aguillot          #+#    #+#              #
-#    Updated: 2018/11/30 11:38:34 by aguillot         ###   ########.fr        #
+#    Updated: 2020/03/10 16:36:56 by schakor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = src/
 
-SRC_NAME = main.c
+SRC_NAME = main.c \
+		   ft_fdf.c \
+		   ft_map_reader.c \
+		   ft_fatal_exit.c \
+
 
 INC = include/
 
@@ -40,7 +44,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	$(CC) -I include $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 clean:
 	rm -fv $(OBJ)
