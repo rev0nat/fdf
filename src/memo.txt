@@ -1,0 +1,14 @@
+FDF
+
+- Une variable zoom qui définit l'espacement entre les points
+	- Elle va aussi gérer le centrage de notre view, dépendamment de la taille de la map.
+	- Pour ça on peut soit définir un mini/maxi de points qui apparaissent à l'écran au lancement du programme, soit
+	  faire en sorte que tout soit visible au début.
+
+- alpha va rotate la view, maintenant ce qu'il faut savoir c'est si le point de vue de base est pris en compte, normalement oui, alpha.
+	u = x*cos(α) + y*cos(α+120°) + z*cos(α-120°)
+	v = x*sin(α) + y*sin(α+120°) + z*sin(α-120°)
+
+Principal problème: comment dessiner notre map au début.
+1. Déterminer le centre de la map;
+2. Dessiner ce qu'on peut de la map avec le zoom a 1, invariable en lancement de programme

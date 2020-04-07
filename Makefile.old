@@ -6,29 +6,29 @@
 #    By: aguillot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/23 17:11:35 by aguillot          #+#    #+#              #
-#    Updated: 2018/11/29 11:52:50 by aguillot         ###   ########.fr        #
+#    Updated: 2020/03/10 16:36:56 by schakor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = src/
 
-SRC_NAME = main.c\
-		ft_draw.c\
-		ft_fatal_exit.c\
-		ft_fdf.c\
-		ft_map_reader.c\
+SRC_NAME = main.c \
+		   ft_fdf.c \
+		   ft_map_reader.c \
+		   ft_fatal_exit.c \
+		   ft_draw.c \
+
+INC = include/
 
 OBJ_PATH = build/
 
-CPPFLAGS = -I include -I libft
+CPPFLAGS = -Wall -Wextra -Werror
 
-LDLIBS = libft/libft.a
+LDLIBS = -I include -I libft -Llibft -lft
 
-NAME = ft_select
+NAME = fdf
 
 CC = gcc
-
-CFLAGS = -Wall -Wextra -Werror
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -40,25 +40,30 @@ all:$(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	$(CC) $^ -lncurses $(LDLIBS) -o $@
+	$(CC) $(LDLIBS) $^ -o $@
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(CPPFLAGS) -DFOO -o $@ -c $<
+	$(CC) -I include $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 clean:
 	rm -fv $(OBJ)
-	make clean -C libft
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 
 fclean: clean
-	make fclean -C libft
 	rm -fv $(NAME)
+
+lftclean:
+	make clean -C libft
+
+lftfclean:
+	make fclean -C libft
 
 re: fclean all
 
 norme:
 	norminette src/*
 	norminette libft/**.[ch]
-	norminette include/ft_select.h
+	norminette include/.h
+
 .PHONY: all, clean, fclean, re

@@ -12,6 +12,14 @@
 
 #include "fdf.h"
 
+
+//test de wikipedia via stackoverflow.
+/*int toIsometric2D(double x, double y,double z, double *u, double*v){
+    *u=(x-z)/sqrt(2);
+    *v=(x+2*y+z)/sqrt(6);
+    return 0;
+}*/
+
 static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 {
 	int x = sqrt(2)/2 * (start.x - start.y);
