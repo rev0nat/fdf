@@ -20,13 +20,21 @@
     return 0;
 }*/
 
+//schakors
 static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 {
-	int x = sqrt(2)/2 * (start.x - start.y);
-	int xx = sqrt(2)/2 * (finish.x - finish.y);
-	int y = (sqrt(2/3) * start.z) - (1 / sqrt(6)) * (start.x + start.y);
-	int yy = (sqrt(2/3) * finish.z) - (1 / sqrt(6)) * (finish.x + finish.y);
-
+    int tx = start.x - (params->map->xmax / 2);
+    int txx = finish.x - (params->map->xmax / 2);
+    int ty = start.y - (params->map->ymax / 2);
+    int tyy = finish.y - (params->map->ymax / 2);
+    int tmpx = (1000 / (params->map->xmax * 2.f)) * tx;
+    int tmpxx = (1000 / (params->map->xmax * 2.f)) * txx;
+    int tmpy = (1000 / (params->map->ymax * 2.f)) * ty;
+    int tmpyy = (1000 / (params->map->ymax * 2.f)) * tyy;
+	int x = sqrt(2)/2 * (tmpx - tmpy);
+	int xx = sqrt(2)/2 * (tmpxx - tmpyy);
+	int y = -(0.8165f * start.z * 2) - (0.4082f) * (tmpx + tmpy);
+    int yy = -(0.8165f * finish.z * 2) - (0.4082f) * (tmpxx + tmpyy);
 	/*int x = start.x;
 	int y = start.y;
 	int xx = finish.x;
@@ -39,12 +47,9 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 	dy = abs(dy);
 	int cumul = 0;
 	int i = 1;
-
-	/*printf("x: %f, y: %f, xx: %f, yy: %f\n", x, y, xx, yy);
-	printf("dx: %f\n", dx);
-	printf("dy: %f\n", dy);*/
+	printf("x: %d, y: %d, xx: %d, yy: %d\n", x, y, xx, yy);
 	printf("dx: %d, dy: %d\n", dx, dy);
-	mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 500, y + 500, 0xb5f7b4);
+	//mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y, 0xb5f7b4);
 	if (dx > dy)
 	{
 		cumul = dx / 2;
@@ -58,7 +63,8 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 				cumul -= dx;
 				y += incy;
 			}
-			//printf("x: %f, y: %f\n", x, y);
+			printf("start: x:%d y:%d, finish: x:%d y:%d\n", start.x, start.y, finish.x, finish.y);
+			printf("onfx: %d, y: %d\n", x, y);
 			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 500, y + 500, 0xb5f7b4);
 			i++;
 		}
@@ -77,23 +83,33 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 				cumul -= dy;
 				x += incx;
 			}
-			//printf("x: %f, y: %f\n", x, y);
+			printf("infffffx: %d, y: %d\n", x, y);
 			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 500, y + 500, 0xb5f7b4);
 			i++;
 		}
 	}
 }
 
+//il faut un algo qui trace les lignes, un qui trace les colonnes
 void		ft_draw(t_param *params)
 {
 	t_point	*points;
 	int		i;
+	int		point_nb;
 
 	points = params->map->point;
+	point_nb = params->map->xmax * params->map->ymax;
 	i = 1;
-	while (i < params->map->xmax)
+	while (i < point_nb)
 	{
-		ft_draw_line(params, points[i - 1], points[i]);
+		if (points[i - 1].y == points[i].y)
+		{
+			ft_draw_line(params, points[i - 1], points[i]);
+			if ((i + params->map->xmax) < point_nb)
+				ft_draw_line(params, points[i - 1], points[i - 1 + params->map->xmax]);
+			if ((points[i].x == (params->map->xmax - 1)) && ((i + params->map->xmax) < point_nb))
+				ft_draw_line(params, points[i], points[i + params->map->xmax]);	
+		}
 		i++;
 	}
 }

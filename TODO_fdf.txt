@@ -1,4 +1,5 @@
 ///Trucs a gerer a la fin
+- On accepte que des maps carrées
 - Verfifier que les options du makefile sont legit -Wall -Wextra -Werror
 - Virer ce fichier du projet
 - Verifier si il faut mlx dans le proj
