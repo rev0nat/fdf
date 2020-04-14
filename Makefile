@@ -22,9 +22,9 @@ OBJ_PATH = build/
 
 CPPFLAGS = -I include -I libft
 
-LDLIBS = libft/libft.a
+LDLIBS = libft/libft.a mlx/libmlx_Linux.a -lXext -lX11
 
-NAME = ft_select
+NAME = fdf
 
 CC = gcc
 
@@ -40,7 +40,7 @@ all:$(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	$(CC) $^ -lncurses $(LDLIBS) -o $@
+	$(CC) -fPIC $^ $(LDLIBS) -o $@
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
