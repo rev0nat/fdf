@@ -60,5 +60,6 @@ void		ft_fdf(char *filepath);
 void		ft_fatal_exit(void);
 void		ft_fatal_exit_putendl(char *str);
 void		ft_draw(t_param *params);
+void		ft_create_img(t_param *params);
 
 #endif

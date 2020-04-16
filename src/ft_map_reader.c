@@ -57,7 +57,7 @@ static void	get_coor(char *file, t_map *map)
 		while (tab[i])
 		{
 			map->point[ind_point].x = i;
-			map->point[ind_point].y = j;
+			map->point[ind_point].y = -j;
 			map->point[ind_point].z = ft_atoi(tab[i]);
 			ind_point++;
 			i++;

@@ -65,7 +65,7 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 			}
 			printf("start: x:%d y:%d, finish: x:%d y:%d\n", start.x, start.y, finish.x, finish.y);
 			printf("onfx: %d, y: %d\n", x, y);
-			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 500, y + 500, 0xb5f7b4);
+			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y, 0xb5f7b4);
 			i++;
 		}
 	}
@@ -84,7 +84,7 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 				x += incx;
 			}
 			printf("infffffx: %d, y: %d\n", x, y);
-			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 500, y + 500, 0xb5f7b4);
+			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y, 0xb5f7b4);
 			i++;
 		}
 	}

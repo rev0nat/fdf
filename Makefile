@@ -17,6 +17,7 @@ SRC_NAME = main.c\
 		ft_fatal_exit.c\
 		ft_fdf.c\
 		ft_map_reader.c\
+		ft_create_img.c
 
 OBJ_PATH = build/
 

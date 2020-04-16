@@ -33,6 +33,7 @@ void		ft_fdf(char *filepath)
 
 	ft_map_reader(filepath, &map);
 	ft_init(&params, &map);
-	ft_draw(&params);
+	ft_create_img(&params);
+	//ft_draw(&params);
 	mlx_loop(params.mlx_ptr);
 }
