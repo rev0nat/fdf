@@ -37,7 +37,6 @@ static void	ft_pxl_to_img(t_param *params, t_point start, t_point finish, int *i
 	if (dx > dy)
 	{
 		cumul = dx / 2;
-		//printf("dans le if (dx > dy): dx: %f, dy: %f\n", dx, dy);
 		while (i <= dx)
 		{
 			x += incx;
@@ -48,9 +47,8 @@ static void	ft_pxl_to_img(t_param *params, t_point start, t_point finish, int *i
 				y += incy;
 			}
 			nb = x + 1000 * y;
-			if (nb > 1000000 ||  nb < 0)
-				break ;
-			img_data[nb] = 0xb5f7b4;
+			if (nb < 1000000 && nb > 0)
+				img_data[nb] = 0xb5f7b4;
 			//mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 250, y + 250, 0xb5f7b4);
 			i++;
 		}
@@ -70,9 +68,8 @@ static void	ft_pxl_to_img(t_param *params, t_point start, t_point finish, int *i
 				x += incx;
 			}
 			nb = x + 1000 * y;
-			if (nb > 1000000 ||  nb < 0)
-				break ;
-			img_data[nb] = 0xb5f7b4;
+			if (nb < 1000000 && nb > 0)
+				img_data[nb] = 0xb5f7b4;
 			//mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 250, y + 250, 0xb5f7b4);
 			i++;
 		}

@@ -47,8 +47,8 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 	dy = abs(dy);
 	int cumul = 0;
 	int i = 1;
-	printf("x: %d, y: %d, xx: %d, yy: %d\n", x, y, xx, yy);
-	printf("dx: %d, dy: %d\n", dx, dy);
+	//printf("x: %d, y: %d, xx: %d, yy: %d\n", x, y, xx, yy);
+	//printf("dx: %d, dy: %d\n", dx, dy);
 	//mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y, 0xb5f7b4);
 	if (dx > dy)
 	{
@@ -63,9 +63,9 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 				cumul -= dx;
 				y += incy;
 			}
-			printf("start: x:%d y:%d, finish: x:%d y:%d\n", start.x, start.y, finish.x, finish.y);
-			printf("onfx: %d, y: %d\n", x, y);
-			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y, 0xb5f7b4);
+			//printf("start: x:%d y:%d, finish: x:%d y:%d\n", start.x, start.y, finish.x, finish.y);
+			//printf("onfx: %d, y: %d\n", x, y);
+			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 250, y + 250, 0xb5f7b4);
 			i++;
 		}
 	}
@@ -83,8 +83,8 @@ static void	ft_draw_line(t_param *params, t_point start, t_point finish)
 				cumul -= dy;
 				x += incx;
 			}
-			printf("infffffx: %d, y: %d\n", x, y);
-			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x, y, 0xb5f7b4);
+			//printf("infffffx: %d, y: %d\n", x, y);
+			mlx_pixel_put(params->mlx_ptr, params->win_ptr, x + 250, y + 250, 0xb5f7b4);
 			i++;
 		}
 	}
